@@ -1,6 +1,6 @@
 # Demo overview:  
-Junos devices send syslog messages to SaltStack.  
-SaltStack automatically collects junos show command output on the "faulty" JUNOS device and archive the output on a Git server.    
+- Junos devices send syslog messages to SaltStack.  
+- SaltStack automatically collects junos show command output on the "faulty" JUNOS device and archive the output on a Git server.    
 
 # Demo building blocks: 
 - Juniper devices
@@ -24,17 +24,47 @@ SaltStack automatically collects junos show command output on the "faulty" JUNOS
 
 # SaltStack 
 
-## Install the master and a minion and junos proxy
-This is not covered by this documentation.
+## Install SaltStack 
 
-## Salt master configuration file 
+This is not covered by this documentation. 
 
-ssh to the Salt master and open the salt master configuration file:
+You need a  master and a minion.  
+
+The Salt Junos proxy has some requirements (```junos-eznc``` python library and other dependencies).  
+Install on the master or on a minion the dependencies to use a SaltStack proxy for Junos.  
+You need to install these dependencies on each node (master/minion) that will run a junos proxy daemon(s).  
+
+You need one junos proxy daemon per device.   
+Start one junos proxy daemon per device.  
+
+## Validate your SaltStack setup 
+
+Run this command on the master: 
 ```
-more /etc/salt/master
+salt-key -L
 ```
 
-Make sure the master configuration file has these details:
+Run this command to make sure the minion is up and responding to the master. This is not an ICMP ping.
+```
+salt -G 'roles:minion' test.ping
+```
+
+Select one the junos proxy and run these additionnal tests.  
+Example with the proxy ```core-rtr-p-02``` (it manages the network device ```core-rtr-p-02```)
+```
+salt core-rtr-p-02 test.ping
+```
+```
+salt core-rtr-p-02 junos.cli "show version"
+```
+## Edit the SaltStack master configuration file 
+
+Edit the salt master configuration file:  
+```
+vi /etc/salt/master
+```
+Make sure the master configuration file has these details:  
+
 ```
 engines:
   - junos_syslog:
@@ -60,12 +90,11 @@ file_roots:
     - /srv/salt
     - /srv/local
 ```
-So:
-- the Salt master is listening junos syslog messages on port 516. It generates equivalents ZMQ messages to the event bus
-- external pillars are in the gitlab repository organization/network_parameters  (master branch)
-- Salt uses the gitlab repository organization/network_model.git this github repository as a remote file server.  
-- Salt uses the directories /srv/salt and /srv/local on the master as a remote file server.  
 
+So: 
+- the Salt master is listening webhooks on port 5001. It generates equivalents ZMQ messages to the event bus
+- external pillars (variables) are in the gitlab repository ```organization/network_parameters``` (master branch)
+- Salt uses the gitlab repository ```organization/network_model``` as a remote file server.  
 
 ## SaltStack Git execution module basic demo
 
