@@ -37,20 +37,21 @@ You need to install these dependencies on each node (master/minion) that will ru
 You need one junos proxy daemon per device.   
 Start one junos proxy daemon per device.  
 
-## Validate your SaltStack setup 
+## Run basic tests 
 
-Run this command on the master: 
+Run this command on the master to check the accepted keys: 
 ```
 salt-key -L
 ```
 
-Run this command to make sure the minion is up and responding to the master. This is not an ICMP ping.
+Run this command on the master to make sure a minion is up and responding to the master. This is not an ICMP ping. 
+Exampple for the minion svl-util-01
 ```
-salt -G 'roles:minion' test.ping
+salt svl-util-01 test.ping
 ```
 
-Select one the junos proxy and run these additionnal tests.  
-Example with the proxy ```core-rtr-p-02``` (it manages the network device ```core-rtr-p-02```)
+Select a junos proxy daemon and run these additionnal tests.  
+Example with the junos proxy ```core-rtr-p-02``` (it manages the network device ```core-rtr-p-02```)
 ```
 salt core-rtr-p-02 test.ping
 ```
@@ -188,10 +189,8 @@ On the Salt master, list all the keys.
 ```
 # salt-key -L
 ```
-Run this command to check if the minions are up and responding to the master. This is not an ICMP ping.
-```
-# salt -G 'roles:minion' test.ping
-```
+Run this command to check if the minions are up and responding to the master. This is not an ICMP ping.  
+Example with the junos proxy ```core-rtr-p-01``` (it manages the network device ```core-rtr-p-01```)  
 ```
 # salt core-rtr-p-01 test.ping
 core-rtr-p-01:
