@@ -19,9 +19,6 @@
 - The sls reactor file used in this content does the following: it parses the data from the ZMQ message to extract the network device name. It then ask to the Junos proxy minion that manages the "faulty" device to execute an sls file.
 - The sls file executed by the Junos proxy minion collects junos show commands output and archive the collected data to a git server  
 
-# Requirements: 
-- Install SaltStack
-
 # SaltStack 
 
 ## Install SaltStack 
@@ -364,6 +361,7 @@ automate_show_commands:
     - arg:
       - junos.collect_data_and_archive_to_git
 ```
+# Junos devices 
 
 # Run the demo: 
 
