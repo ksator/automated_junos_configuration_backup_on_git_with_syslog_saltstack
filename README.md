@@ -303,7 +303,8 @@ base:
 {% endif %}
 ```
 
-The pillar ```data_collection``` is used by the file [collect_data_and_archive_to_git.sls](collect_data_and_archive_to_git.sls) 
+
+The pillar ```data_collection``` is used by the file [collect_data_and_archive_to_git.sls](collect_data_and_archive_to_git.sls)  
 The pillar ```data_collection``` is used to maintain the list of show commands we want SaltStack to run automatically based on events.  
 Update the file ```production.sls``` in the repository ```organization/network_parameters``` (```ext_pillar```) to define the pillar ```data_collection``` 
 ```
@@ -315,13 +316,13 @@ data_collection:
 
 ## Test your automation content manually from the master
 
-Example with the proxy ```core-rtr-p-01``` (it manages the network device ```core-rtr-p-01```).   
-Run this command on the master to ask to the proxy ```core-rtr-p-01``` to execute it.  
+Example with the proxy ```core-rtr-p-02``` (it manages the network device ```core-rtr-p-02```).   
+Run this command on the master to ask to the proxy ```core-rtr-p-02``` to execute it.  
 ```
-salt core-rtr-p-01 state.apply junos.collect_data_and_archive_to_git
+salt core-rtr-p-02 state.apply junos.collect_data_and_archive_to_git
 ```
 
-The data collected by the proxy ```core-rtr-p-01``` is archived in the directory [core-rtr-p-01](core-rtr-p-01)  
+The data collected by the proxy ```core-rtr-p-02``` is archived in the directory [core-rtr-p-02](core-rtr-p-02)  
 
 ##  Update the Salt reactor
 
