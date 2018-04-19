@@ -240,7 +240,7 @@ core-rtr-p-01:
 ```
 ### Junos state modules 
 
-The files [collect_junos_show_commands_example_1.sls](collect_junos_show_commands_example_1.sls) and [collect_junos_show_commands_example_2.sls](collect_junos_show_commands_example_2.sls) use a diff syntax but they are equivalents.  
+  The files [collect_show_commands_example_1.sls](collect_show_commands_example_1.sls) and [collect_show_commands_example_2.sls](collect_show_commands_example_2.sls) use a diff syntax but they are equivalents.  
 
 #### Syntax 1
 
