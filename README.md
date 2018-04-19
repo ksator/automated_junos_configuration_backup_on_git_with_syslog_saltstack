@@ -404,7 +404,29 @@ Run this command on the master:
 
 ## Trigger a syslog message from a junos device 
 
-Shutdown an interface of a junos device. The operationnal state will move from up to down.The junos device will send a syslog message to SaltStack. SaltStack will run show commands on this device and will archive the data collected on a git server.   
+Shutdown an interface of a junos device.  
+
+```
+root@core-rtr-p-02> edit
+Entering configuration mode
+
+[edit]
+root@core-rtr-p-02# run show interfaces ge-0/0/5 terse
+Interface               Admin Link Proto    Local                 Remote
+ge-0/0/5                up    up
+
+[edit]
+root@core-rtr-p-02# set interfaces ge-0/0/5 disable
+
+root@core-rtr-p-02# commit
+commit complete
+
+[edit]
+root@core-rtr-p-02# run show interfaces ge-0/0/5 terse
+Interface               Admin Link Proto    Local                 Remote
+ge-0/0/5                down  down
+```
+The operationnal state moved from up to down. The junos device sent a syslog message ```SNMP_TRAP_LINK_DOWN``` to SaltStack. SaltStack rans show commands on this device and archived the data collected on a git server.   
 
 ## Verify on the git server 
 
