@@ -1,8 +1,10 @@
 # Demo overview:  
+
 - Junos devices send syslog messages to SaltStack.  
-- SaltStack automatically collects junos show command output on the "faulty" JUNOS device and archive the output on a Git server.    
+- Then SaltStack automatically collects junos show command output on the JUNOS device that send a syslog message, and SaltStack automatically archives the collected data on a Git server.    
 
 # Demo building blocks: 
+
 - Juniper devices
 - SaltStack
 
@@ -27,12 +29,9 @@ This is not covered by this documentation.
 
 You need a  master and a minion.  
 
-The Salt Junos proxy has some requirements (```junos-eznc``` python library and other dependencies).  
-Install on the master or on a minion the dependencies to use a SaltStack proxy for Junos.  
-You need to install these dependencies on each node (master/minion) that will run a junos proxy daemon(s).  
+The Salt Junos proxy has some requirements (```junos-eznc``` python library and other dependencies). Install on the master or on a minion the dependencies to use a SaltStack proxy for Junos. You need to install these dependencies on each node (master/minion) that will run a junos proxy daemon(s).  
 
-You need one junos proxy daemon per device.   
-Start one junos proxy daemon per device.  
+You need one junos proxy daemon per device. Start one junos proxy daemon per device.  
 
 ## Run basic tests 
 
@@ -42,7 +41,7 @@ salt-key -L
 ```
 
 Run this command on the master to make sure a minion is up and responding to the master. This is not an ICMP ping. 
-Exampple for the minion svl-util-01
+Example for the minion ```svl-util-01```
 ```
 salt svl-util-01 test.ping
 ```
@@ -90,7 +89,7 @@ file_roots:
 ```
 
 So: 
-- the Salt master is listening webhooks on port 5001. It generates equivalents ZMQ messages to the event bus
+- the Salt master is listening junos syslog messages on port 516. For each junos syslog message received, it generates an equivalent ZMQ message and publish it to the event bus
 - external pillars (variables) are in the gitlab repository ```organization/network_parameters``` (master branch)
 - Salt uses the gitlab repository ```organization/network_model``` as a remote file server.  
 
@@ -102,8 +101,8 @@ On the Salt master, list all the keys.
 ```
 salt-key -L
 ```
-These commands are run from the master.   
-Most of these commands are using the Git execution module.   
+The below commands are run from the master.  
+Most of these commands are using the Git execution module.  
 So the master is asking to the minion ```core-rtr-p-01``` to execute these commands.    
 ```
 # salt core-rtr-p-01 git.clone /tmp/local_copy git@github.com:JNPRAutomate/appformix_saltstack_show_commands_collection.git identity="/root/.ssh/id_rsa"
@@ -180,13 +179,15 @@ The above commands pushed the file [test.txt](test.txt) to this repository
 
 ## Test your Junos proxy daemons
 
+### Run these basic tests
+
 ssh to the Salt master.
 
 On the Salt master, list all the keys. 
 ```
 # salt-key -L
 ```
-Run this command to check if the minions are up and responding to the master. This is not an ICMP ping.  
+Run this command on the master to check if a minion is up and responding to the master. This is not an ICMP ping.  
 Example with the junos proxy ```core-rtr-p-01``` (it manages the network device ```core-rtr-p-01```)  
 ```
 # salt core-rtr-p-01 test.ping
@@ -198,7 +199,7 @@ List the grains:
 # salt core-rtr-p-01 grains.ls
 ...
 ```
-Get the value of the grain nodename. 
+Get the value of the grain ```nodename```. 
 ```
 # salt core-rtr-p-01 grains.item nodename
 core-rtr-p-01:
@@ -208,12 +209,13 @@ core-rtr-p-01:
 ```
 So, the junos proxy daemon ```core-rtr-p-01``` is running on the minion ```svl-util-01```  
 
-The Salt Junos proxy has some requirements (junos-eznc python library and other dependencies).
+The Salt Junos proxy has some requirements (```junos-eznc``` python library and other dependencies).
 ```
 # salt svl-util-01 cmd.run "pip list | grep junos"
 svl-util-01:
     junos-eznc (2.1.7)
 ```
+
 ### Junos execution modules
 
 Run this command on the master to ask to a proxy to use a Junos execution module:   
