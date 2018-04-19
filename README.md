@@ -325,16 +325,15 @@ The data collected by the proxy ```core-rtr-p-01``` is archived in the directory
 
 ##  Update the Salt reactor
 
-Update the Salt reactor file  
 The reactor binds sls files to event tags. The reactor has a list of event tags to be matched, and each event tag has a list of reactor SLS files to be run. So these sls files define the SaltStack reactions.  
 Update the reactor.  
-This reactor binds ```jnpr/syslog/*/SNMP_TRAP_LINK_*``` to ```/srv/reactor/automate_show_commands.sls``` 
 ```
 # more /etc/salt/master.d/reactor.conf
 reactor: 
    - 'jnpr/syslog/*/SNMP_TRAP_LINK_*':
        - /srv/reactor/automate_show_commands.sls
 ```
+This reactor binds ```jnpr/syslog/*/SNMP_TRAP_LINK_*``` to ```/srv/reactor/automate_show_commands.sls```  
 
 Restart the Salt master:
 ```
@@ -347,7 +346,7 @@ The command ```salt-run reactor.list``` lists currently configured reactors:
 salt-run reactor.list
 ```
 
-Create the sls reactor file ```/srv/reactor/automate_show_commands.sls```.  
+Create the sls file ```/srv/reactor/automate_show_commands.sls```.  
 ```
 # more /srv/reactor/automate_show_commands.sls
 {% if data['data'] is defined %}
@@ -356,18 +355,15 @@ Create the sls reactor file ```/srv/reactor/automate_show_commands.sls```.
 {% set d = data %}
 {% endif %}
 
-
 automate_show_commands:
   local.state.apply:
     - tgt: "{{ d['hostname'] }}"
     - arg:
       - junos.collect_data_and_archive_to_git
 ```
+The file [automate_show_commands.sls](automate_show_commands.sls) parses the data from the ZMQ message that has the tags ```jnpr/syslog/*/SNMP_TRAP_LINK_*``` and extracts the network device name and asks to the Junos proxy minion that manages the device that send this syslog message to apply the ```junos/collect_data_and_archive_to_git.sls``` file.  
 
-The file [automate_show_commands.sls](automate_show_commands.sls) parses the data from the ZMQ message that has the tags ```jnpr/syslog/*/SNMP_TRAP_LINK_*``` and extracts the network device name.  
-This file then asks to the Junos proxy minion that manages the device that send this syslog message to apply the ```junos/collect_data_and_archive_to_git.sls``` file.  
-
-The file [collect_data_and_archive_to_git.sls](collect_data_and_archive_to_git.sls) executed by the Junos proxy minion collects show commands from the device that send the syslog message and archives the data collected to a git server.  
+The file [collect_data_and_archive_to_git.sls](collect_data_and_archive_to_git.sls) executed by the Junos proxy minion is located in the ```junos``` directory of the ```organization/network_model``` gitlab repository (```gitfs_remotes```). It collects show commands from the device that send the syslog message and archives the data collected to a git server.  
 
 The file [collect_data_and_archive_to_git.sls](collect_data_and_archive_to_git.sls) use the pillar ```data_collection```. The list of show commands to collect is maintained with the variable ```data_collection``` in the repository ```organization/network_parameters``` (```ext_pillar```) 
 
