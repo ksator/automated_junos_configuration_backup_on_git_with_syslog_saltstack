@@ -408,6 +408,17 @@ Run this command on the master:
 
 ## Trigger a syslog message from a junos device 
 
+```
+root@core-rtr-p-02# set system login message "welcome to this demo"
+
+[edit]
+root@core-rtr-p-02# commit and-quit
+commit complete
+Exiting configuration mode
+
+root@core-rtr-p-02>
+
+```
 The junos device sent a syslog message ```UI_COMMIT_COMPLETED``` to SaltStack. SaltStack rans show commands on this device to collect the new junos configuration and other dettails and archived the data collected on a git server.   
 
 ## Verify on the git server 
