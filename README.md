@@ -282,7 +282,7 @@ Run this command on the master to ask to the proxy ```core-rtr-p-01``` to execut
 ```
 ## sls file to collect junos show commands and to archive the output to git
 
-This sls file [collect_data_and_archive_to_git.sls](collect_data_and_archive_to_git.sls) collectes data from junos devices (show commands) and archive the data collected on a git server  
+The file [collect_data_and_archive_to_git.sls](collect_data_and_archive_to_git.sls) collectes data from junos devices (show commands) and archive the data collected on a git server  
 
 Add the file [collect_data_and_archive_to_git.sls](collect_data_and_archive_to_git.sls) in the ```junos``` directory of the ```organization/network_model``` gitlab repository (```gitfs_remotes```) .  
 
