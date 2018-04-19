@@ -108,14 +108,14 @@ The below commands are run from the master.
 Most of these commands are using the Git execution module.  
 So the master is asking to the minion ```core-rtr-p-01``` to execute these commands.    
 ```
-# salt core-rtr-p-01 git.clone /tmp/local_copy git@github.com:JNPRAutomate/event_driven_junos_show_commands_collection_with_syslog_saltstack.git identity="/root/.ssh/id_rsa"
+# salt core-rtr-p-01 git.clone /tmp/local_copy git@github.com:JNPRAutomate/automated_junos_configuration_backup_with_syslog_saltstack.git identity="/root/.ssh/id_rsa"
 core-rtr-p-01:
     True
 
 # salt core-rtr-p-01 cmd.run "ls /tmp/local_copy"
 core-rtr-p-01:
     README.md
-    collect_junos_show_commands.sls
+    ...
     ...
 
 # salt core-rtr-p-01 git.config_set user.email me@example.com cwd=/tmp/local_copy
@@ -312,9 +312,9 @@ The pillar ```data_collection``` is used to maintain the list of show commands w
 Update the file ```production.sls``` in the repository ```organization/network_parameters``` (```ext_pillar```) to define the pillar ```data_collection``` 
 ```
 data_collection:  
-   - command: show interfaces  
-   - command: show chassis hardware
-   - command: show version 
+   - command: show configuration
+   - command: show system commit
+   - command: show configuration | compare rollback 1
 ```
 
 ## Test your automation content manually from the master
@@ -334,10 +334,10 @@ Update the reactor.
 ```
 # more /etc/salt/master.d/reactor.conf
 reactor: 
-   - 'jnpr/syslog/*/SNMP_TRAP_LINK_*':
+    - 'jnpr/syslog/*/UI_COMMIT_COMPLETED':
        - /srv/reactor/automate_show_commands.sls
 ```
-This reactor binds ```jnpr/syslog/*/SNMP_TRAP_LINK_*``` to ```/srv/reactor/automate_show_commands.sls```  
+This reactor binds ```jnpr/syslog/*/UI_COMMIT_COMPLETED``` to ```/srv/reactor/automate_show_commands.sls```  
 
 Restart the Salt master:
 ```
@@ -365,11 +365,11 @@ automate_show_commands:
     - arg:
       - junos.collect_data_and_archive_to_git
 ```
-The file [automate_show_commands.sls](automate_show_commands.sls) parses the data from the ZMQ message that has the tags ```jnpr/syslog/*/SNMP_TRAP_LINK_*``` and extracts the network device name and asks to the Junos proxy minion that manages the device that send this syslog message to apply the file ```junos/collect_data_and_archive_to_git.sls```.  
+The file [automate_show_commands.sls](automate_show_commands.sls) parses the data from the ZMQ message that has the tags ```jnpr/syslog/*/UI_COMMIT_COMPLETED``` and extracts the network device name and asks to the Junos proxy minion that manages the device that send this syslog message to apply the file ```junos/collect_data_and_archive_to_git.sls```.  
 
 The file [collect_data_and_archive_to_git.sls](collect_data_and_archive_to_git.sls) executed by the Junos proxy minion is located in the ```junos``` directory of the ```organization/network_model``` gitlab repository (```gitfs_remotes```). It collects show commands and archives the data collected to a git server.  
 
-The list of show commands to collect is maintained with the variable ```data_collection```.  The file [collect_data_and_archive_to_git.sls](collect_data_and_archive_to_git.sls) use the pillar ```data_collection```.  This variable is in the gitlab repository ```organization/network_parameters``` (```ext_pillar```) 
+The list of junos commands to collect is maintained with the variable ```data_collection```.  The file [collect_data_and_archive_to_git.sls](collect_data_and_archive_to_git.sls) use the pillar ```data_collection```.  This variable is in the gitlab repository ```organization/network_parameters``` (```ext_pillar```) 
 
 # Junos devices 
 
