@@ -1,7 +1,7 @@
 # Demo overview:  
 
 - Junos devices send syslog messages to SaltStack.  
-- Then SaltStack automatically collects junos show command output on the JUNOS device that send a syslog message, and SaltStack automatically archives the collected data on a Git server.    
+- Based on syslog messages received, SaltStack automatically collects junos show commands output on the JUNOS device that send a syslog message, and SaltStack automatically archives the collected data on a Git server.    
 
 # Demo building blocks: 
 
@@ -361,32 +361,50 @@ automate_show_commands:
     - arg:
       - junos.collect_data_and_archive_to_git
 ```
-The file [automate_show_commands.sls](automate_show_commands.sls) parses the data from the ZMQ message that has the tags ```jnpr/syslog/*/SNMP_TRAP_LINK_*``` and extracts the network device name and asks to the Junos proxy minion that manages the device that send this syslog message to apply the ```junos/collect_data_and_archive_to_git.sls``` file.  
+The file [automate_show_commands.sls](automate_show_commands.sls) parses the data from the ZMQ message that has the tags ```jnpr/syslog/*/SNMP_TRAP_LINK_*``` and extracts the network device name and asks to the Junos proxy minion that manages the device that send this syslog message to apply the file ```junos/collect_data_and_archive_to_git.sls```.  
 
-The file [collect_data_and_archive_to_git.sls](collect_data_and_archive_to_git.sls) executed by the Junos proxy minion is located in the ```junos``` directory of the ```organization/network_model``` gitlab repository (```gitfs_remotes```). It collects show commands from the device that send the syslog message and archives the data collected to a git server.  
+The file [collect_data_and_archive_to_git.sls](collect_data_and_archive_to_git.sls) executed by the Junos proxy minion is located in the ```junos``` directory of the ```organization/network_model``` gitlab repository (```gitfs_remotes```). It collects show commands and archives the data collected to a git server.  
 
-The file [collect_data_and_archive_to_git.sls](collect_data_and_archive_to_git.sls) use the pillar ```data_collection```. The list of show commands to collect is maintained with the variable ```data_collection``` in the repository ```organization/network_parameters``` (```ext_pillar```) 
+The list of show commands to collect is maintained with the variable ```data_collection```.  The file [collect_data_and_archive_to_git.sls](collect_data_and_archive_to_git.sls) use the pillar ```data_collection```.  This variable is in the gitlab repository ```organization/network_parameters``` (```ext_pillar```) 
 
 # Junos devices 
 
-# Run the demo: 
+The Salt master is listening junos syslog messages on port 516.  
+
+Configure your junos devices to send some sylog messages to SaltStack master ip address on the port 516.  
+Example for the device ```core-rtr-p-02```  
+```
+# salt core-rtr-p-02 junos.cli "show configuration system syslog host 192.168.128.174 | display set"
+core-rtr-p-02:
+    ----------
+    message:
+
+        set system syslog host 192.168.128.174 any any
+        set system syslog host 192.168.128.174 match SNMP_TRAP_LINK
+        set system syslog host 192.168.128.174 port 516
+    out:
+        True
+```
+
+# Run the demo 
 
 ## Watch syslog messages and ZMQ messages  
 
-Run this command on the master to see webhook notifications:
+Run this command on the master to see the syslog messages sent by junos devices:  
 ```
-# tcpdump port 5001 -XX 
+# tcpdump port 516 -XX 
 ```
 
-Salt provides a runner that displays events in real-time as they are received on the Salt master:  
+Salt provides a runner that displays events in real-time as they are received on the Salt master.  
+Run this command on the master:   
 ```
 # salt-run state.event pretty=True
 ```
 
 ## Trigger a syslog message from a junos device 
 
+Shutdown an interface of a junos device. The operationnal state will move from up to down.The junos device will send a syslog message to SaltStack. SaltStack will run show commands on this device and will archive the data collected on a git server.   
+
 ## Verify on the git server 
 
-The data collected by the proxy ```core-rtr-p-01```  is archived in the directory [core-rtr-p-01](core-rtr-p-01)  
 The data collected by the proxy ```core-rtr-p-02```  is archived in the directory [core-rtr-p-02](core-rtr-p-02)
-
