@@ -1,7 +1,10 @@
 # Demo overview:  
 
-- Junos devices send syslog messages to SaltStack.  
-- Based on syslog messages received, SaltStack automatically collects junos show commands output on the JUNOS device that send a syslog message, and SaltStack automatically archives the collected data on a Git server.    
+At each junos commit, SaltStack automatically collects the new junos configuration file and archives it to a git server: 
+- When a Junos commit is completed, the Junos device send a syslog message ```UI_COMMIT_COMPLETED```.  
+- The junos devices are configured to send this syslog message to SaltStack.  
+- Each time SaltStack receives this syslog message, SaltStack automatically collects the new junos configuration file from the
+JUNOS device that send this commit syslog message, and SaltStack automatically archives the new junos configuration file to a git server
 
 # Demo building blocks: 
 
@@ -11,7 +14,7 @@
 # Building blocks role: 
 
 ## Junos devices: 
-- They send syslog messages to SaltStack
+- They are configured to send the syslog message ```UI_COMMIT_COMPLETED``` to SaltStack when a commit is completed
 
 ## SaltStack: 
 - In addition to the Salt master, Salt Junos proxy minions are required (one process per Junos device is required)  
@@ -19,7 +22,7 @@
 - The Salt master generates a ZMQ messages to the event bus when a junos syslog message is received. The ZMQ message has a tag and data. The data structure is a dictionary, which contains information about the event.
 - The Salt reactor binds sls files to event tags. The reactor has a list of event tags to be matched, and each event tag has a list of reactor SLS files to be run. So these sls files define the SaltStack reactions.
 - The sls reactor file used in this content does the following: it parses the data from the ZMQ message to extract the network device name. It then ask to the Junos proxy minion that manages the "faulty" device to execute an sls file.
-- The sls file executed by the Junos proxy minion collects junos show commands output and archive the collected data to a git server  
+- The sls file executed by the Junos proxy minion collects the new junos configuration and archives the collected data to a git server  
 
 # SaltStack 
 
