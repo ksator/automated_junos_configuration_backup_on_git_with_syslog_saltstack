@@ -375,7 +375,7 @@ The list of junos commands to collect is maintained with the variable ```data_co
 
 The Salt master is listening junos syslog messages on port 516.  
 
-Configure your junos devices to send some sylog messages to SaltStack master ip address on the port 516.  
+Configure your junos devices to send the sylog message ```UI_COMMIT_COMPLETED``` to the SaltStack master ip address on port 516.  
 Example for the device ```core-rtr-p-02```  
 ```
 # salt core-rtr-p-02 junos.cli "show configuration system syslog host 192.168.128.174 | display set"
@@ -384,10 +384,11 @@ core-rtr-p-02:
     message:
 
         set system syslog host 192.168.128.174 any any
-        set system syslog host 192.168.128.174 match SNMP_TRAP_LINK
+        set system syslog host 192.168.128.174 match UI_COMMIT_COMPLETED
         set system syslog host 192.168.128.174 port 516
     out:
         True
+
 ```
 
 # Run the demo 
@@ -407,29 +408,7 @@ Run this command on the master:
 
 ## Trigger a syslog message from a junos device 
 
-Shutdown an interface of a junos device.  
-
-```
-root@core-rtr-p-02> edit
-Entering configuration mode
-
-[edit]
-root@core-rtr-p-02# run show interfaces ge-0/0/5 terse
-Interface               Admin Link Proto    Local                 Remote
-ge-0/0/5                up    up
-
-[edit]
-root@core-rtr-p-02# set interfaces ge-0/0/5 disable
-
-root@core-rtr-p-02# commit
-commit complete
-
-[edit]
-root@core-rtr-p-02# run show interfaces ge-0/0/5 terse
-Interface               Admin Link Proto    Local                 Remote
-ge-0/0/5                down  down
-```
-The operationnal state moved from up to down. The junos device sent a syslog message ```SNMP_TRAP_LINK_DOWN``` to SaltStack. SaltStack rans show commands on this device and archived the data collected on a git server.   
+The junos device sent a syslog message ```UI_COMMIT_COMPLETED``` to SaltStack. SaltStack rans show commands on this device to collect the new junos configuration and other dettails and archived the data collected on a git server.   
 
 ## Verify on the git server 
 
