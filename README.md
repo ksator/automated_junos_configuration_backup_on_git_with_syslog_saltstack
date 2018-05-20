@@ -4,9 +4,12 @@ At each junos commit, SaltStack automatically collects the new junos configurati
 - When a Junos commit is completed, the Junos device send a syslog message ```UI_COMMIT_COMPLETED```.  
 - The junos devices are configured to send this syslog message to SaltStack.  
 - Each time SaltStack receives this syslog message, SaltStack automatically collects the new junos configuration file from the
-JUNOS device that send this commit syslog message, and SaltStack automatically archives the new junos configuration file to a git server
+JUNOS device that send this commit syslog message, and SaltStack automatically archives the new junos configuration file to a git server  
+
+[!continous_backup.png](continous_backup.png)  
 
 # Demo building blocks: 
+
 
 - Juniper devices
 - SaltStack
