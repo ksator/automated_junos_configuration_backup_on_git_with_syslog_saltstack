@@ -8,7 +8,7 @@ JUNOS device that send this commit syslog message, and SaltStack automatically a
 
 ![continous_backup.png](continous_backup.png)  
 
-Here's a more detailled description of this [demo](Automated_Junos_configuration_backup.pdf) 
+Here's a more detailled presentation of this [demo](Automated_Junos_configuration_backup.pdf) 
 
 # Demo building blocks: 
 
