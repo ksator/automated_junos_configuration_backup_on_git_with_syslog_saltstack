@@ -12,9 +12,11 @@ Here's a more detailled presentation of this [demo](Automated_Junos_configuratio
 
 # Demo building blocks: 
 
-
-- Juniper devices
+- Junos devices
+- Ubuntu 16.04
 - SaltStack
+- Docker
+- Gitlab
 
 
 # Building blocks role: 
