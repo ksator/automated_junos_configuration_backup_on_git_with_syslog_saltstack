@@ -2,7 +2,17 @@
 
 [Project description](#project-description)  
 [About the lab](#about-the-lab)  
-[About the demo](#about-the-demo)  
+    [Building blocks](#building-blocks)  
+    [Versions](#versions)  
+    [IP addresses](#ip-addresses)  
+[About the demo](#about-the-demo)    
+    [Overview](#overview)  
+    [Details](#details)  
+    [Building blocks description](#building-blocks-description)  
+        [Junos](#junos)  
+        [SaltStack](#saltstack)  
+        [Gitlab](#gitlab)  
+        [Ubuntu](#ubuntu)  
 [Instructions to prepare the setup](#instructions-to-prepare-the-setup)  
 [Familiarize yourself with this setup](#familiarize-yourself-with-this-setup)  
 [Run the demo](#run-the-demo)  
@@ -52,12 +62,12 @@ Here's a more detailled description of this [demo](Automated_Junos_configuration
 
 ## Building blocks description
 
-### Junos device
+### Junos
 - There is one single Junos device
 - The hostname is ```vMX-1```
 - It is configured to send the syslog message ```UI_COMMIT_COMPLETED``` to SaltStack when a commit is completed
 
-### SaltStack: 
+### SaltStack
 - This demo uses these SaltStack components: A master, a minion, a proxy, the junos_syslog engine.  
 - All in one SaltStack setup: all the above components runs on the same Ubuntu host.  
 - The Salt master listens to syslog messages sent by junos devices
