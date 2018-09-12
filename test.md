@@ -1,13 +1,13 @@
 # Documentation structure
 
-[About this project](#about-this-project)  
+[Project description](#project-description)  
 [About the lab](#about-the-lab)  
 [About the demo](#about-the-demo)  
 [Instructions to prepare the setup](#instructions-to-prepare-the-setup)  
 [Familiarize yourself with this setup](#familiarize-yourself-with-this-setup)  
 [Run the demo](#run-the-demo)  
 
-# About this project  
+# Project description
 
 At each junos commit, SaltStack automatically collects the new junos configuration file and archives it to a git server  
 
@@ -17,7 +17,7 @@ This is a relatively simple demo. For a more advanced, robust, scalable, distrib
 
 ## Building blocks 
 
-- Junos device 
+- Junos
 - SaltStack
 - Docker
 - Gitlab
@@ -42,13 +42,13 @@ The other componants will be installed using the below instructions.
 At each junos commit, SaltStack automatically collects the new junos configuration file and archives it to a git server: 
 - When a Junos commit is completed, the Junos device send a syslog message ```UI_COMMIT_COMPLETED```.  
 - The junos device is configured to send this syslog message to SaltStack.  
-- Each time SaltStack receives this syslog message, SaltStack automatically collects the new junos configuration file from the JUNOS device that sent this commit syslog message, and SaltStack automatically archives the new junos configuration file to a git server  
+- Each time SaltStack receives this syslog message, SaltStack automatically collects the new junos configuration file from the Junos device that sent this commit syslog message, and SaltStack automatically archives the new Junos configuration file to a git server  
 
 ![continous_backup.png](continous_backup.png)  
 
 ## Details 
 
-Here's a more detailled presentation of this [demo](Automated_Junos_configuration_backup.pdf) 
+Here's a more detailled description of this [demo](Automated_Junos_configuration_backup.pdf) 
 
 ## Building blocks description
 
@@ -59,6 +59,7 @@ Here's a more detailled presentation of this [demo](Automated_Junos_configuratio
 
 ### SaltStack: 
 - This demo uses these SaltStack components: A master, a minion, a proxy, the junos_syslog engine.  
+- All in one SaltStack setup: all the above components runs on the same Ubuntu host.  
 - The Salt master listens to syslog messages sent by junos devices
 - The Salt master generates a ZMQ messages to the event bus when a junos syslog message is received. The ZMQ message has a tag and data. The data structure is a dictionary, which contains information about the event.
 - The Salt reactor binds sls files to event tags. The reactor has a list of event tags to be matched, and each event tag has a list of reactor SLS files to be run. So these sls files define the SaltStack reactions.
