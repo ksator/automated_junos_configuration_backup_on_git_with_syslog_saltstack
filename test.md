@@ -14,6 +14,14 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Gitlab](#gitlab)  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Ubuntu](#ubuntu)  
 [Instructions to prepare the setup](#instructions-to-prepare-the-setup)  
+&nbsp;&nbsp;&nbsp;&nbsp;[Overview](##overview-1)
+&nbsp;&nbsp;&nbsp;&nbsp;[Clone this repository](#clone-this-repository)
+&nbsp;&nbsp;&nbsp;&nbsp;[Install Docker](#install-docker)
+&nbsp;&nbsp;&nbsp;&nbsp;[Instanciate a Gitlab docker container](#instanciate-a-gitlab-docker-container)
+&nbsp;&nbsp;&nbsp;&nbsp;[Configure Gitlab](#configure-gitlab)
+[](#)
+[](#)
+
 [Familiarize yourself with this setup](#familiarize-yourself-with-this-setup)  
 [Run the demo](#run-the-demo)  
 
