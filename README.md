@@ -55,7 +55,7 @@ At each junos commit, SaltStack automatically collects the new junos configurati
 - The junos device is configured to send this syslog message to SaltStack.  
 - Each time SaltStack receives this syslog message, SaltStack automatically collects the new junos configuration file from the Junos device that sent this commit syslog message, and SaltStack automatically archives the new Junos configuration file to a git server  
 
-![continous_backup.png](continous_backup.png)  
+![continous-backup.png](continous-backup.png)  
 
 
 Here's a more detailled description of this [demo](Automated_Junos_configuration_backup.pdf) 
