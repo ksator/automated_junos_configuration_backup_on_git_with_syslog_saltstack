@@ -40,12 +40,12 @@ This is a relatively simple demo. For a more advanced, robust, scalable, distrib
 # Lab description
 
 Building blocks:  
-- Junos
-- SaltStack
-- Docker
-- Gitlab
-- Ubuntu 
-
+- Junos (one vMX)
+- Ubuntu (one host) with: 
+    - SaltStack
+    - Docker
+    - Gitlab  
+    
 
 | hostname  | Management IP address  | Management interface  | Operating system | Version  | 
 | ------------- | ------------- | ------------- | ------------- | ------------- |
