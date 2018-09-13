@@ -228,7 +228,7 @@ $ watch -n 10 'docker ps'
 
 ### Verify you can access to Gitlab GUI
 
-Access Gitlab GUI with a browser ```http://100.123.35.1:9080``` 
+Access Gitlab GUI with a browser ```http://100.123.35.1:9080```  
 Gitlab user is ```root```    
 Create a password ```password```  
 Sign in with ```root``` and ```password```  
@@ -237,7 +237,7 @@ Sign in with ```root``` and ```password```
 ## Configure Gitlab
 
 ### Create a group  
-Create the organization ```organization``` (Public)    
+Create the group ```organization``` (Public)    
 
 ### Create new projects
 Create these new projects in the group ```organization```
