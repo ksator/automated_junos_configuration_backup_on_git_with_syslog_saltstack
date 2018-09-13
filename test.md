@@ -421,12 +421,11 @@ salt-minion 2018.3.2 (Oxygen)
 The Salt Junos proxy has some requirements (```junos-eznc``` python library and other dependencies). 
 
 ```
-$ sudo -s
 # apt-get install python-pip
 # pip list
 # apt-get --auto-remove --yes remove python-openssl
 # pip install pyOpenSSL junos-eznc jxmlease jsnapy
-# pip list
+# pip list | grep "pyOpenSSL\|junos-eznc\|jxmlease\|jsnapy"
 ```
 
 Verify you can use junos-eznc
