@@ -745,7 +745,7 @@ create a ```/srv/reactor/``` directory
 ```
 # mkdir /srv/reactor/
 ```
-and copy [these sls reactor files](reactors) to the directory ```/srv/reactor/```
+and copy [these sls reactor files](reactor) to the directory ```/srv/reactor/```
 ```
 # cp automated_junos_configuration_backup_on_git_with_syslog_saltstack/reactor/* /srv/reactor/
 # ls /srv/reactor/
