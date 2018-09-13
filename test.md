@@ -870,7 +870,7 @@ Run this command. The  master asks to the proxy ```vMX-1``` to execute the sls f
 
 ## state file to collect junos show commands and to archive the output to git
 
-The file [collect_data_and_archive_to_git.sls](states/collect_data_and_archive_to_git.sls) collectes data from junos devices (show commands) and archive the data collected on a git server  
+The state file [collect_data_and_archive_to_git.sls](states/collect_data_and_archive_to_git.sls) collectes data from junos devices (show commands) and archive the data collected on a git server  
 
 ```
 # more network_model/collect_data_and_archive_to_git.sls
