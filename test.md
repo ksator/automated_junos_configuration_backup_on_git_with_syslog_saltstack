@@ -3,8 +3,7 @@
 [Project description](#project-description)  
 [About the lab](#about-the-lab)  
 &nbsp;&nbsp;&nbsp;&nbsp;[Building blocks](#building-blocks)  
-&nbsp;&nbsp;&nbsp;&nbsp;[Versions](#versions)  
-&nbsp;&nbsp;&nbsp;&nbsp;[IP addresses](#ip-addresses)  
+&nbsp;&nbsp;&nbsp;&nbsp;[Details](#details)  
 [About the demo](#about-the-demo)    
 &nbsp;&nbsp;&nbsp;&nbsp;[Overview](#overview)  
 &nbsp;&nbsp;&nbsp;&nbsp;[Details](#details)  
@@ -45,17 +44,12 @@ This is a relatively simple demo. For a more advanced, robust, scalable, distrib
 - Gitlab
 - Ubuntu 
 
-## Versions
+## Details
 
-The ubuntu host is running 16.04 release.  
-The Junos device is a vMX running 17.4R1-S2.2  
-The other componants will be installed using the below instructions.  
-
-## IP addresses 
-| Operating system | Management IP address  | Interface  | hostname  | 
-| ------------- | ------------- | ------------- | ------------- |
-| Ubuntu | 100.123.35.1    | eth0  | ubuntu
-| Junos | 100.123.1.1    | me0  | vMX-1
+| hostname  | Management IP address  | Management interface  | Operating system | Version  | 
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| ubuntu | 100.123.35.1  | eth0  | ubuntu  | 16.04  |
+| vMX-1 | 100.123.1.1 | me0  | Junos  | 17.4R1-S2.2  | 
 
 # About the demo 
 
