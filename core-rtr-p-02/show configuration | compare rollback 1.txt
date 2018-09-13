@@ -1,4 +1,0 @@
-
-[edit system login]
--   message test;
-+   message "welcome to this demo";

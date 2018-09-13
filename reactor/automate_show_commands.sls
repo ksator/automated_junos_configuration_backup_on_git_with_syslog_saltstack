@@ -8,5 +8,5 @@ automate_show_commands:
   local.state.apply:
     - tgt: "{{ d['hostname'] }}"
     - arg:
-      - junos.collect_data_and_archive_to_git
+      - collect_data_and_archive_to_git
       

@@ -8,7 +8,7 @@ git clone:
   module.run:
     - name: git.clone
     - cwd: /tmp/local_repo
-    - url: git@github.com:JNPRAutomate/automated_junos_configuration_backup_with_syslog_saltstack.git
+    - url: git@100.123.35.1:organization/configuration_backup.git
     - identity: "/root/.ssh/id_rsa"
 
 git config set email:
@@ -40,7 +40,7 @@ make sure the device directory is presents:
   file.directory:
     - name: /tmp/local_repo/{{ device_directory }}
 
-{% for item in pillar['data_collection'] %}
+{% for item in pillar['backup_configuration'] %}
 
 {{ item.command }}:
   junos.cli:
