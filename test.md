@@ -751,14 +751,14 @@ create a ```/srv/reactor/``` directory
 ```
 and copy [these sls reactor files](reactors) to the directory ```/srv/reactor/```
 ```
-# cp automated_junos_configuration_backup_on_git_with_syslog_saltstack/reactors/* /srv/reactor/
+# cp automated_junos_configuration_backup_on_git_with_syslog_saltstack/reactor/* /srv/reactor/
 # ls /srv/reactor/
 # more /srv/reactor/automate_show_commands.sls
 ```
 
-The file [automate_show_commands.sls](states/automate_show_commands.sls) parses the data from the ZMQ message that has the tags ```jnpr/syslog/*/UI_COMMIT_COMPLETED``` and extracts the network device name and asks to the proxy that manages the device that send this syslog message to apply the file [collect_data_and_archive_to_git.sls](states/collect_data_and_archive_to_git.sls)
+The reactor [automate_show_commands.sls](reactor/automate_show_commands.sls) parses the data from the ZMQ message that has the tags ```jnpr/syslog/*/UI_COMMIT_COMPLETED``` and extracts the network device name and asks to the proxy that manages the device that send this syslog message to apply the state file [collect_data_and_archive_to_git.sls](states/collect_data_and_archive_to_git.sls)
 
-The file [collect_data_and_archive_to_git.sls](states/collect_data_and_archive_to_git.sls) executed by the proxy is located in the ```network_model``` repository.  
+The state file [collect_data_and_archive_to_git.sls](states/collect_data_and_archive_to_git.sls) executed by the proxy is located in the ```network_model``` repository.  
 It collects show commands and archives the data collected to a git server.  
 ```
 # more network_model/collect_data_and_archive_to_git.sls
