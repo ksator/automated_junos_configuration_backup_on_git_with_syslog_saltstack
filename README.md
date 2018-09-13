@@ -783,7 +783,7 @@ Access Gitlab GUI with a browser ```http://100.123.35.1:9080/organization/config
 The Salt master is listening junos syslog messages on port 516.  
 The pillar [production.sls](pillars/production.sls) defines the variable ```syslog_host```.  
 the variable ```syslog_host``` is the ip address of the salt master.  
-This variable is used by the state file [syslog.sls](states/syslog.sls) to render the template [syslog.conf](junos/syslog.conf) 
+This variable is used by the state file [syslog.sls](states/syslog.sls) to render the template [syslog.conf](templates/syslog.conf) 
 (to generate Junos configuration).  
 the state file [syslog.sls](states/syslog.sls) then loads the generated configuration to Junos devices  
 
