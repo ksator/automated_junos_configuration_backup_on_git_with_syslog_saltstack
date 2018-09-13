@@ -1,9 +1,7 @@
 # Documentation structure
 
 [Project description](#project-description)  
-[About the lab](#about-the-lab)  
-&nbsp;&nbsp;&nbsp;&nbsp;[Building blocks](#building-blocks)  
-&nbsp;&nbsp;&nbsp;&nbsp;[Details](#details)  
+[Lab description](#lab-description)  
 [About the demo](#about-the-demo)    
 &nbsp;&nbsp;&nbsp;&nbsp;[Overview](#overview)  
 &nbsp;&nbsp;&nbsp;&nbsp;[Details](#details)  
@@ -39,17 +37,15 @@ At each junos commit, SaltStack automatically collects the new junos configurati
 
 This is a relatively simple demo. For a more advanced, robust, scalable, distributed and automated equivalent demo, please visit the repository https://github.com/ksator/automation_summit_Q3_2018  
 
-# About the lab
+# Lab description
 
-## Building blocks 
-
+Building blocks:  
 - Junos
 - SaltStack
 - Docker
 - Gitlab
 - Ubuntu 
 
-## Details
 
 | hostname  | Management IP address  | Management interface  | Operating system | Version  | 
 | ------------- | ------------- | ------------- | ------------- | ------------- |
