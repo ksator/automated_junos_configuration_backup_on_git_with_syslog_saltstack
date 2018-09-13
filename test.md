@@ -840,16 +840,20 @@ The above commands pushed the file ```test.txt``` to this repository ```configur
 
 ## state files to collect Junos commands
 
-The files [collect_show_commands_example_1.sls](collect_show_commands_example_1.sls) and [collect_show_commands_example_2.sls](collect_show_commands_example_2.sls) use a diff syntax but they are equivalents.  
+The state files [collect_show_commands_example_1.sls](states/collect_show_commands_example_1.sls) and [collect_show_commands_example_2.sls](states/collect_show_commands_example_2.sls) use a diff syntax but they are equivalents.  
 
 ### Syntax 1
 
 ```
-# more network_model/collect_junos_show_commands_example_1.sls
+# more network_model/collect_show_commands_example_1.sls
+
 ```
 Run this command. The master asks to the proxy ```vMX-1``` to execute the sls file [collect_show_commands_example_1.sls](collect_show_commands_example_1.sls).
 ```
 # salt vMX-1 state.apply collect_show_commands_example_1
+# ls /tmp/show_chassis_hardware.txt
+# ls /tmp/show_version.txt
+
 ```
 
 ### Syntax 2
@@ -859,6 +863,9 @@ Run this command. The master asks to the proxy ```vMX-1``` to execute the sls fi
 Run this command. The  master asks to the proxy ```vMX-1``` to execute the sls file [collect_show_commands_example_2.sls](collect_show_commands_example_2.sls).
 ```
 # salt vMX-1 state.apply collect_show_commands_example_2
+# ls /tmp/show_chassis_hardware.txt
+# ls /tmp/show_version.txt
+
 ```
 
 ## state file to collect junos show commands and to archive the output to git
