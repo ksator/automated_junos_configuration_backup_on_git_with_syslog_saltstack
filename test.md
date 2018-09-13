@@ -453,6 +453,7 @@ Junos_syslog engine  listens to syslog messages from Junos devices, extracts eve
 
 ```
 # pip install pyparsing twisted
+# pip list | grep "pyparsing\|Twisted"
 ```
 
 ## Configure your setup 
