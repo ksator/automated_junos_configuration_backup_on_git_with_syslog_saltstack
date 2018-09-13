@@ -2,10 +2,8 @@
 
 [Project description](#project-description)  
 [Lab description](#lab-description)  
-[About the demo](#about-the-demo)    
-&nbsp;&nbsp;&nbsp;&nbsp;[Overview](#overview)  
-&nbsp;&nbsp;&nbsp;&nbsp;[Details](#details)  
-&nbsp;&nbsp;&nbsp;&nbsp;[Building blocks description](#building-blocks-description)    
+[demo description](#demo-description)    
+[Building blocks description](#building-blocks-description)    
 [Instructions to prepare the setup](#instructions-to-prepare-the-setup)  
 &nbsp;&nbsp;&nbsp;&nbsp;[Overview](##overview-1)  
 &nbsp;&nbsp;&nbsp;&nbsp;[Clone this repository](#clone-this-repository)  
@@ -52,9 +50,8 @@ Building blocks:
 | ubuntu | 100.123.35.1  | eth0  | ubuntu  | 16.04  |
 | vMX-1 | 100.123.1.1 | me0  | Junos  | 17.4R1-S2.2  | 
 
-# About the demo 
+# demo description
 
-## Overview 
 
 At each junos commit, SaltStack automatically collects the new junos configuration file and archives it to a git server: 
 - When a Junos commit is completed, the Junos device send a syslog message ```UI_COMMIT_COMPLETED```.  
@@ -63,18 +60,17 @@ At each junos commit, SaltStack automatically collects the new junos configurati
 
 ![continous_backup.png](continous_backup.png)  
 
-## Details 
 
 Here's a more detailled description of this [demo](Automated_Junos_configuration_backup.pdf) 
 
-## Building blocks description
+# Building blocks description
 
-### Junos
+## Junos
 - There is one single Junos device
 - The hostname is ```vMX-1```
 - It is configured to send the syslog message ```UI_COMMIT_COMPLETED``` to SaltStack when a commit is completed
 
-### SaltStack
+## SaltStack
 - This demo uses these SaltStack components: A master, a minion, a proxy, the junos_syslog engine.  
 - All in one SaltStack setup: all the above components runs on the same Ubuntu host.  
 - The Salt master listens to syslog messages sent by junos devices
@@ -83,12 +79,12 @@ Here's a more detailled description of this [demo](Automated_Junos_configuration
 - The sls reactor file used in this content does the following: it parses the data from the ZMQ message to extract the network device name. It then ask to the proxy that manages the "faulty" device to execute an sls file.
 - The sls file executed by the proxy collects the new junos configuration and archives the collected data to a git server  
 
-### Gitlab  
+## Gitlab  
 - This SaltStack setup uses the gitlab server for external pillars (variables) 
 - This SaltStack setup uses the gitlab server as a remote file server (templates, sls files, ...).  
 - The Junos configuration is automatically saved on the Gitlab server
 
-### Ubuntu
+## Ubuntu
 - There is one single Ubuntu host 
 - It has SaltStack installed: all the SaltStack components described above are installed on the same Ubuntu host.   
 - It has Docker installed. Gitlab is a container instanciated on this host. 
@@ -684,7 +680,7 @@ The files server has Junos configuration templates and SaltStack state files.
 
 #### templates for Junos 
 
-Run these commands to copy these [Junos templates](junos) at the root of the repository ```network_model```.  
+Run these commands to copy these [Junos templates](templates) at the root of the repository ```network_model```.  
 
 ```
 # cp automated_junos_configuration_backup_on_git_with_syslog_saltstack/templates/* network_model/
