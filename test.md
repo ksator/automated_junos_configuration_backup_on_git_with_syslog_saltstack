@@ -581,7 +581,7 @@ The ```top.sls``` file map minions to sls (pillars) files.
 #### Pillars configuration
 
 Refer to the [master configuration file](master) to know the location for pillars.  
-Run these commands to copy [these pillars files](pillars) at the root of the repository ```network_parameters``` 
+Run these commands to copy [pillars files](pillars) at the root of the repository ```network_parameters``` 
 
 ```
 # cp automated_junos_configuration_backup_on_git_with_syslog_saltstack/pillars/* network_parameters/
