@@ -261,7 +261,7 @@ $ sudo -s
 ```
 ```
 # ls /root/.ssh/
-id_rsa  id_rsa.pub  known_hosts
+id_rsa  id_rsa.pub  
 ```
 #### Add the public key to Gitlab  
 Copy the public key:
@@ -279,7 +279,7 @@ $ sudo -s
 ```
 ```
 # ls /root/.ssh/
-config       id_rsa       id_rsa.pub   known_hosts
+config       id_rsa       id_rsa.pub  
 ```
 ```
 # vi /root/.ssh/config
