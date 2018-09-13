@@ -682,12 +682,12 @@ The [master configuration file](master) indicates the location for the files ser
 We are using an external files server (repository ```network_model```).  
 The files server has Junos configuration templates and SaltStack state files.  
 
-#### Junos configuration templates 
+#### templates for Junos 
 
 Run these commands to copy these [Junos templates](junos) at the root of the repository ```network_model```.  
 
 ```
-# cp automated_junos_configuration_backup_on_git_with_syslog_saltstack/junos/* network_model/
+# cp automated_junos_configuration_backup_on_git_with_syslog_saltstack/templates/* network_model/
 # cd network_model/
 # git add .
 # git commit -m "add junos templates"
@@ -717,8 +717,11 @@ Engines are executed in a separate process that is monitored by Salt. If a Salt 
 Engines can run on both master and minion.  To start an engine, you need to specify engine information in master/minion config file depending on where you want to run the engine. Once the engine configuration is added, start the master and minion normally. The engine should start along with the salt master/minion.   
 Junos_syslog engine  listens to syslog messages from Junos devices, extracts event information and generates and pusblishes messages on SaltStack 0MQ bus.  
 
-We added the junos syslog engine configuration in the [master configuration file](master) so the junos device should send their syslog messages to the master ip address on port 516. 
+We already added the junos syslog engine configuration in the [master configuration file](master) so the junos device should send their syslog messages to the master ip address on port 516. 
 
+```
+# more /etc/salt/master
+```
 
 ### Configure SaltStack reactor
 
