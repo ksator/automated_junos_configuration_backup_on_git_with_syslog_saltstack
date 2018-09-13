@@ -844,7 +844,7 @@ The state files [collect_show_commands_example_1.sls](states/collect_show_comman
 # more network_model/collect_show_commands_example_1.sls
 
 ```
-Run this command. The master asks to the proxy ```vMX-1``` to execute the sls file [collect_show_commands_example_1.sls](collect_show_commands_example_1.sls).
+Run this command. The master asks to the proxy ```vMX-1``` to execute the sls file [collect_show_commands_example_1.sls](states/collect_show_commands_example_1.sls).
 ```
 # salt vMX-1 state.apply collect_show_commands_example_1
 # ls /tmp/show_chassis_hardware.txt
@@ -856,7 +856,7 @@ Run this command. The master asks to the proxy ```vMX-1``` to execute the sls fi
 ```
 # more network_model/collect_show_commands_example_2.sls
 ```
-Run this command. The  master asks to the proxy ```vMX-1``` to execute the sls file [collect_show_commands_example_2.sls](collect_show_commands_example_2.sls).
+Run this command. The  master asks to the proxy ```vMX-1``` to execute the sls file [collect_show_commands_example_2.sls](states/collect_show_commands_example_2.sls).
 ```
 # salt vMX-1 state.apply collect_show_commands_example_2
 # ls /tmp/show_chassis_hardware.txt
