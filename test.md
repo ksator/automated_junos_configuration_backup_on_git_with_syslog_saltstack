@@ -52,10 +52,10 @@ The Junos device is a vMX running 17.4R1-S2.2
 The other componants will be installed using the below instructions.  
 
 ## IP addresses 
-| Operating system | Management IP address  | Interface  |
-| ------------- | ------------- | ------------- |
-| Ubuntu | 100.123.35.1    | eth0  | 
-| Junos | 100.123.1.1    | me0  |
+| Operating system | Management IP address  | Interface  | hostname  | 
+| ------------- | ------------- | ------------- | ------------- |
+| Ubuntu | 100.123.35.1    | eth0  | ubuntu
+| Junos | 100.123.1.1    | me0  | vMX-1
 
 # About the demo 
 
