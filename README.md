@@ -73,7 +73,7 @@ Here's a more detailled description of this [demo](Automated_Junos_configuration
 - The Salt master listens to syslog messages sent by junos devices
 - The Salt master generates a ZMQ messages to the event bus when a junos syslog message is received. The ZMQ message has a tag and data. The data structure is a dictionary, which contains information about the event.
 - The Salt reactor binds sls files to event tags. The reactor has a list of event tags to be matched, and each event tag has a list of reactor SLS files to be run. So these sls files define the SaltStack reactions.
-- The sls reactor file used in this content does the following: it parses the data from the ZMQ message to extract the network device name. It then ask to the proxy that manages the "faulty" device to execute an sls file.
+- The sls reactor file used in this content does the following: it parses the data from the ZMQ message to extract the network device name. It then ask to the proxy that manages the device to execute an sls file.
 - The sls file executed by the proxy collects the new junos configuration and archives the collected data to a git server  
 
 ## Gitlab  
